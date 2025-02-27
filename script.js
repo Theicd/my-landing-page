@@ -162,52 +162,45 @@ document.addEventListener("DOMContentLoaded", function() {
   document.querySelectorAll(".embla").forEach(setupCarousel);
 });
 
+// Initialize Facebook SDK for better video embedding on mobile
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v18.0';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+// After Facebook SDK is loaded, try to reparse any embedded videos
+window.fbAsyncInit = function() {
+  FB.init({
+    xfbml: true,
+    version: 'v18.0'
+  });
+  
+  // Force reparsing of XFBML to ensure videos are loaded
+  setTimeout(function() {
+    if (typeof FB !== 'undefined' && FB.XFBML) {
+      FB.XFBML.parse();
+    }
+  }, 2000);
+};
+
 // Facebook video embed mobile compatibility fix
 document.addEventListener('DOMContentLoaded', function() {
   // Check if mobile device
   const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
   
-  // If on mobile, enhance the Facebook video handling
+  // For mobile devices, add a small helper that adds the fb-xfbml-parse class to the body
+  // This can help Facebook's SDK recognize and render the embed properly
   if (isMobile) {
-    const fbIframe = document.querySelector('iframe[src*="facebook.com/plugins/video"]');
+    document.body.classList.add('fb-xfbml-parse');
     
-    if (fbIframe) {
-      // Ensure iframe is visible and properly sized
-      fbIframe.style.position = 'absolute';
-      fbIframe.style.top = '0';
-      fbIframe.style.left = '0';
-      fbIframe.style.width = '100%';
-      fbIframe.style.height = '100%';
-      
-      // Try reloading the iframe after a delay
-      setTimeout(function() {
-        const originalSrc = fbIframe.src;
-        fbIframe.src = originalSrc + '&_=' + new Date().getTime();
-      }, 1000);
-      
-      // Check if video is visible after 3 seconds
-      setTimeout(function() {
-        const iframeParent = fbIframe.parentElement;
-        if (iframeParent && (iframeParent.offsetHeight < 50 || fbIframe.offsetHeight < 50)) {
-          // If the iframe container has insufficient height, show the fallback
-          document.querySelector('.mobile-fallback').style.display = 'block';
-        }
-      }, 3000);
-      
-      // Force iframe reload on orientation change
-      window.addEventListener('orientationchange', function() {
-        setTimeout(function() {
-          const originalSrc = fbIframe.src;
-          fbIframe.src = '';
-          setTimeout(function() {
-            fbIframe.src = originalSrc;
-          }, 100);
-        }, 500);
-      });
+    // Only show the fallback link on mobile
+    const fallbackLink = document.querySelector('.mobile-fallback');
+    if (fallbackLink) {
+      fallbackLink.style.display = 'block';
     }
-    
-    // Show mobile fallback for users who may have issues
-    document.querySelector('.mobile-fallback').style.display = 'block';
   }
 });
 

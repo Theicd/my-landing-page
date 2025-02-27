@@ -167,9 +167,10 @@ document.addEventListener('DOMContentLoaded', function() {
   // Check if mobile device
   const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
   
-  // If on mobile, check if the Facebook iframe is loaded properly
+  // If on mobile, enhance the Facebook video handling
   if (isMobile) {
     const fbIframe = document.querySelector('iframe[src*="facebook.com/plugins/video"]');
+    
     if (fbIframe) {
       // Ensure iframe is visible and properly sized
       fbIframe.style.position = 'absolute';
@@ -178,19 +179,35 @@ document.addEventListener('DOMContentLoaded', function() {
       fbIframe.style.width = '100%';
       fbIframe.style.height = '100%';
       
-      // Try reloading the iframe if necessary
+      // Try reloading the iframe after a delay
+      setTimeout(function() {
+        const originalSrc = fbIframe.src;
+        fbIframe.src = originalSrc + '&_=' + new Date().getTime();
+      }, 1000);
+      
+      // Check if video is visible after 3 seconds
       setTimeout(function() {
         const iframeParent = fbIframe.parentElement;
-        if (iframeParent && iframeParent.offsetHeight === 0) {
-          // If the iframe container has no height, try reloading
+        if (iframeParent && (iframeParent.offsetHeight < 50 || fbIframe.offsetHeight < 50)) {
+          // If the iframe container has insufficient height, show the fallback
+          document.querySelector('.mobile-fallback').style.display = 'block';
+        }
+      }, 3000);
+      
+      // Force iframe reload on orientation change
+      window.addEventListener('orientationchange', function() {
+        setTimeout(function() {
           const originalSrc = fbIframe.src;
           fbIframe.src = '';
           setTimeout(function() {
             fbIframe.src = originalSrc;
-          }, 50);
-        }
-      }, 1000);
+          }, 100);
+        }, 500);
+      });
     }
+    
+    // Show mobile fallback for users who may have issues
+    document.querySelector('.mobile-fallback').style.display = 'block';
   }
 });
 

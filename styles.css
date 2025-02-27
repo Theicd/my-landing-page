@@ -451,6 +451,23 @@ footer {
   z-index: 20;
 }
 
+/* Mobile compatibility styles */
+.mobile-fallback {
+  display: none;
+}
+
+/* Show fallback on mobile devices */
+@media (max-width: 768px) {
+  .mobile-fallback {
+    display: block;
+  }
+  
+  /* Additional mobile-specific styles for Facebook iframe */
+  iframe[src*="facebook.com/plugins/video"] {
+    min-height: 300px !important;
+  }
+}
+
 /* קסם דיגיטלי section */
 .max-w-4xl .section-title {
   margin-top: 0;

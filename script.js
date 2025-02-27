@@ -167,33 +167,47 @@ document.addEventListener('DOMContentLoaded', function() {
   // Check if mobile device
   const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
   
-  // For mobile devices, add a small helper that adds the fb-xfbml-parse class to the body
+  // If on mobile, enhance the Facebook video handling
   if (isMobile) {
-    document.body.classList.add('fb-xfbml-parse');
+    const fbIframe = document.querySelector('iframe[src*="facebook.com/plugins/video"]');
     
-    // Only show the fallback link on mobile
-    const fallbackLink = document.querySelector('.mobile-fallback');
-    if (fallbackLink) {
-      fallbackLink.style.display = 'block';
+    if (fbIframe) {
+      // Ensure iframe is visible and properly sized
+      fbIframe.style.position = 'absolute';
+      fbIframe.style.top = '0';
+      fbIframe.style.left = '0';
+      fbIframe.style.width = '100%';
+      fbIframe.style.height = '100%';
+      
+      // Try reloading the iframe after a delay
+      setTimeout(function() {
+        const originalSrc = fbIframe.src;
+        fbIframe.src = originalSrc + '&_=' + new Date().getTime();
+      }, 1000);
+      
+      // Check if video is visible after 3 seconds
+      setTimeout(function() {
+        const iframeParent = fbIframe.parentElement;
+        if (iframeParent && (iframeParent.offsetHeight < 50 || fbIframe.offsetHeight < 50)) {
+          // If the iframe container has insufficient height, show the fallback
+          document.querySelector('.mobile-fallback').style.display = 'block';
+        }
+      }, 3000);
+      
+      // Force iframe reload on orientation change
+      window.addEventListener('orientationchange', function() {
+        setTimeout(function() {
+          const originalSrc = fbIframe.src;
+          fbIframe.src = '';
+          setTimeout(function() {
+            fbIframe.src = originalSrc;
+          }, 100);
+        }, 500);
+      });
     }
     
-    // Force FB XFBML to reparse on window resize or orientation change
-    function handleResize() {
-      if (typeof FB !== 'undefined' && FB.XFBML) {
-        FB.XFBML.parse();
-      }
-    }
-    
-    // Add event listeners for resize and orientation change
-    window.addEventListener('resize', handleResize);
-    window.addEventListener('orientationchange', handleResize);
-    
-    // Initial parse after a delay to ensure the SDK is loaded
-    setTimeout(function() {
-      if (typeof FB !== 'undefined' && FB.XFBML) {
-        FB.XFBML.parse();
-      }
-    }, 3000);
+    // Show mobile fallback for users who may have issues
+    document.querySelector('.mobile-fallback').style.display = 'block';
   }
 });
 

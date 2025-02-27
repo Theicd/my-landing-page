@@ -468,6 +468,39 @@ footer {
   }
 }
 
+/* Facebook video embed styles */
+.fb-video {
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+  background-color: rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fb-video iframe {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 300px !important;
+}
+
+/* Mobile-specific video settings */
+@media (max-width: 768px) {
+  .fb-video {
+    min-height: 400px;
+  }
+  
+  /* Force Facebook video to display properly on mobile */
+  .fb-video iframe {
+    position: relative !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 400px !important;
+    max-width: 100% !important;
+  }
+}
+
 /* קסם דיגיטלי section */
 .max-w-4xl .section-title {
   margin-top: 0;

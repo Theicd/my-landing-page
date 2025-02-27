@@ -471,14 +471,15 @@ footer {
     display: block !important;
   }
   
-  .aspect-[9/16] {
+  /* Fixed aspect ratio container for video */
+  div[class^="aspect-"] {
     position: relative;
-    padding-bottom: 177.78%; /* 16:9 Aspect Ratio (9 / 16 = 0.5625) */
+    padding-bottom: 177.78%; /* 9:16 Aspect Ratio */
     height: 0;
     overflow: hidden;
   }
   
-  .aspect-[9/16] iframe {
+  div[class^="aspect-"] iframe {
     position: absolute;
     top: 0;
     left: 0;
@@ -528,7 +529,7 @@ footer {
   }
 
   .video-container > div {
-    padding-top: 177.77% !important; /* 16:9 aspect ratio */
+    padding-top: 56.25% !important; /* 16:9 aspect ratio */
   }
 }
 

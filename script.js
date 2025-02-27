@@ -167,11 +167,48 @@ document.addEventListener('DOMContentLoaded', function() {
   // Check if mobile device
   const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
   
-  // If on mobile, show the fallback link
+  // If on mobile, enhance the Facebook video handling
   if (isMobile) {
-    const mobileFallback = document.querySelector('.mobile-fallback');
-    if (mobileFallback) {
-      mobileFallback.style.display = 'block';
+    const fbIframe = document.querySelector('iframe[src*="facebook.com/plugins/video"]');
+    
+    if (fbIframe) {
+      console.log('Facebook video iframe detected on mobile');
+      
+      // Ensure mobile fallback link is visible
+      const mobileFallback = document.querySelector('.mobile-fallback');
+      if (mobileFallback) {
+        mobileFallback.style.display = 'block';
+      }
+      
+      // Add proper mobile attributes to iframe
+      fbIframe.setAttribute('playsinline', '');
+      
+      // Try reloading the iframe after a delay
+      setTimeout(function() {
+        console.log('Reloading Facebook iframe');
+        const originalSrc = fbIframe.src;
+        // Add mute parameter if not present
+        let newSrc = originalSrc;
+        if (originalSrc.indexOf('mute=') === -1) {
+          newSrc = originalSrc + (originalSrc.indexOf('?') !== -1 ? '&' : '?') + 'mute=1';
+        }
+        // Add cache buster
+        fbIframe.src = newSrc + '&_=' + new Date().getTime();
+      }, 1000);
+      
+      // Force iframe reload on orientation change
+      window.addEventListener('orientationchange', function() {
+        console.log('Orientation changed, reloading video');
+        setTimeout(function() {
+          const originalSrc = fbIframe.src;
+          fbIframe.src = '';
+          setTimeout(function() {
+            fbIframe.src = originalSrc;
+          }, 100);
+        }, 500);
+      });
+    } else {
+      console.log('Facebook video iframe not found on mobile');
     }
   }
 });

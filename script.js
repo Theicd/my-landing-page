@@ -181,8 +181,9 @@ document.addEventListener('DOMContentLoaded', function() {
       }
       
       // Add proper mobile attributes to iframe
-      fbIframe.setAttribute('muted', '');
-      fbIframe.setAttribute('playsinline', '');
+      const fbVideoURL = `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(fbIframe.src)}&autoplay=1&mute=1&playsinline=1&controls=0&loop=1`;
+      fbIframe.src = fbVideoURL;
+      fbIframe.setAttribute('allow', 'autoplay; encrypted-media; fullscreen;');
       
       // Try reloading the iframe after a delay
       setTimeout(function() {
@@ -202,6 +203,16 @@ document.addEventListener('DOMContentLoaded', function() {
             fbIframe.src = originalSrc;
           }, 100);
         }, 500);
+      });
+      
+      // Add click event to play video
+      fbIframe.addEventListener('click', function() {
+        this.contentWindow.postMessage({event: 'command', func: 'playVideo'}, '*');
+      });
+      
+      // Add touch event to play video
+      fbIframe.addEventListener('touchstart', function() {
+        this.contentWindow.postMessage({event: 'command', func: 'playVideo'}, '*');
       });
     } else {
       console.log('Facebook video iframe not found on mobile');

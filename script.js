@@ -172,30 +172,33 @@ document.addEventListener('DOMContentLoaded', function() {
     const fbIframe = document.querySelector('iframe[src*="facebook.com/plugins/video"]');
     
     if (fbIframe) {
-      // Ensure iframe is visible and properly sized
-      fbIframe.style.position = 'absolute';
-      fbIframe.style.top = '0';
-      fbIframe.style.left = '0';
-      fbIframe.style.width = '100%';
-      fbIframe.style.height = '100%';
+      console.log('Facebook video iframe detected on mobile');
+      
+      // Ensure mobile fallback link is visible
+      const mobileFallback = document.querySelector('.mobile-fallback');
+      if (mobileFallback) {
+        mobileFallback.style.display = 'block';
+      }
+      
+      // Add proper mobile attributes to iframe
+      fbIframe.setAttribute('playsinline', '');
       
       // Try reloading the iframe after a delay
       setTimeout(function() {
+        console.log('Reloading Facebook iframe');
         const originalSrc = fbIframe.src;
-        fbIframe.src = originalSrc + '&_=' + new Date().getTime();
-      }, 1000);
-      
-      // Check if video is visible after 3 seconds
-      setTimeout(function() {
-        const iframeParent = fbIframe.parentElement;
-        if (iframeParent && (iframeParent.offsetHeight < 50 || fbIframe.offsetHeight < 50)) {
-          // If the iframe container has insufficient height, show the fallback
-          document.querySelector('.mobile-fallback').style.display = 'block';
+        // Add mute parameter if not present
+        let newSrc = originalSrc;
+        if (originalSrc.indexOf('mute=') === -1) {
+          newSrc = originalSrc + (originalSrc.indexOf('?') !== -1 ? '&' : '?') + 'mute=1';
         }
-      }, 3000);
+        // Add cache buster
+        fbIframe.src = newSrc + '&_=' + new Date().getTime();
+      }, 1000);
       
       // Force iframe reload on orientation change
       window.addEventListener('orientationchange', function() {
+        console.log('Orientation changed, reloading video');
         setTimeout(function() {
           const originalSrc = fbIframe.src;
           fbIframe.src = '';
@@ -204,10 +207,9 @@ document.addEventListener('DOMContentLoaded', function() {
           }, 100);
         }, 500);
       });
+    } else {
+      console.log('Facebook video iframe not found on mobile');
     }
-    
-    // Show mobile fallback for users who may have issues
-    document.querySelector('.mobile-fallback').style.display = 'block';
   }
 });
 

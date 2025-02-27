@@ -181,19 +181,15 @@ document.addEventListener('DOMContentLoaded', function() {
       }
       
       // Add proper mobile attributes to iframe
+      fbIframe.setAttribute('muted', '');
       fbIframe.setAttribute('playsinline', '');
       
       // Try reloading the iframe after a delay
       setTimeout(function() {
         console.log('Reloading Facebook iframe');
         const originalSrc = fbIframe.src;
-        // Add mute parameter if not present
-        let newSrc = originalSrc;
-        if (originalSrc.indexOf('mute=') === -1) {
-          newSrc = originalSrc + (originalSrc.indexOf('?') !== -1 ? '&' : '?') + 'mute=1';
-        }
         // Add cache buster
-        fbIframe.src = newSrc + '&_=' + new Date().getTime();
+        fbIframe.src = originalSrc + '&_=' + new Date().getTime();
       }, 1000);
       
       // Force iframe reload on orientation change

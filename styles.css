@@ -41,7 +41,7 @@ body {
 .hero-video-container {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 100dvh;
 }
 
 .hero-video {
@@ -471,15 +471,14 @@ footer {
     display: block !important;
   }
   
-  /* Fixed aspect ratio container for video */
-  div[class^="aspect-"] {
+  .aspect-[9/16] {
     position: relative;
-    padding-bottom: 177.78%; /* 9:16 Aspect Ratio */
+    padding-bottom: 177.78%; /* 16:9 Aspect Ratio (9 / 16 = 0.5625) */
     height: 0;
     overflow: hidden;
   }
   
-  div[class^="aspect-"] iframe {
+  .aspect-[9/16] iframe {
     position: absolute;
     top: 0;
     left: 0;
@@ -529,7 +528,7 @@ footer {
   }
 
   .video-container > div {
-    padding-top: 56.25% !important; /* 16:9 aspect ratio */
+    padding-top: 177.77% !important; /* 16:9 aspect ratio */
   }
 }
 

@@ -162,6 +162,38 @@ document.addEventListener("DOMContentLoaded", function() {
   document.querySelectorAll(".embla").forEach(setupCarousel);
 });
 
+// Facebook video embed mobile compatibility fix
+document.addEventListener('DOMContentLoaded', function() {
+  // Check if mobile device
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  
+  // If on mobile, check if the Facebook iframe is loaded properly
+  if (isMobile) {
+    const fbIframe = document.querySelector('iframe[src*="facebook.com/plugins/video"]');
+    if (fbIframe) {
+      // Ensure iframe is visible and properly sized
+      fbIframe.style.position = 'absolute';
+      fbIframe.style.top = '0';
+      fbIframe.style.left = '0';
+      fbIframe.style.width = '100%';
+      fbIframe.style.height = '100%';
+      
+      // Try reloading the iframe if necessary
+      setTimeout(function() {
+        const iframeParent = fbIframe.parentElement;
+        if (iframeParent && iframeParent.offsetHeight === 0) {
+          // If the iframe container has no height, try reloading
+          const originalSrc = fbIframe.src;
+          fbIframe.src = '';
+          setTimeout(function() {
+            fbIframe.src = originalSrc;
+          }, 50);
+        }
+      }, 1000);
+    }
+  }
+});
+
 // ניקוי כל אירועי ה-onclick מהכרטיסיות והאלמנטים בתוכן
 window.addEventListener('load', function() {
     console.log('Cleaning onclick events from cards after page load');

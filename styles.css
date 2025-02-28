@@ -104,10 +104,9 @@ body {
   }
   
   .section-title {
-    font-size: 27px !important;
+    font-size: 22px !important;
     margin-bottom: 1rem;
-    line-height: 1.2;
-    padding: 0 10px;
+    padding: 0 5px;
   }
   
   .hero-subtitle {
@@ -118,6 +117,18 @@ body {
 
   .ai-text {
     font-size: 1.05em !important;
+  }
+  
+  .icon-glow {
+    font-size: 18px;
+  }
+  
+  .section-title + .grid-container .card:first-of-type {
+    margin-top: 15px;
+  }
+  
+  .section-title + .grid-container {
+    margin-top: 25px;
   }
 }
 
@@ -165,20 +176,6 @@ body {
   text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
   line-height: 1.2;
   animation: fadeUp 0.6s ease-out forwards;
-}
-
-@media screen and (max-width: 480px) {
-  .section-title {
-    font-size: 27px !important;
-    margin-bottom: 1rem;
-    padding: 0 10px;
-  }
-  .section-title + .grid-container .card:first-of-type {
-    margin-top: 15px;
-  }
-  .section-title + .grid-container {
-    margin-top: 25px;
-  }
 }
 
 /* Grid Layouts */
@@ -438,6 +435,13 @@ footer {
   opacity: 1;
   filter: brightness(1.2);
   padding: 0 2px;
+}
+
+@media screen and (max-width: 480px) {
+  .section-title .icon-glow {
+    font-size: 18px;
+    margin: 0 2px; /* מרווח קטן יותר בין האייקון לטקסט */
+  }
 }
 
 .meeting-number {

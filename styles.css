@@ -171,6 +171,16 @@ body {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
+/* Section styles */
+.section {
+  padding: 2rem 1rem;
+}
+
+.section.bg-white + .section.bg-white {
+  margin-top: -30px; /* הקטנת המרווח בין סקשנים עם אותו רקע */
+  padding-top: 10px;
+}
+
 .section-title {
   font-size: clamp(1.5rem, 5vw, 2.5rem);
   font-weight: bold;
@@ -185,15 +195,25 @@ body {
   animation: fadeUp 0.6s ease-out forwards;
 }
 
+/* סגנון ספציפי לכותרת "מה נלמד ליצור עם AI?" */
 .what-we-learn {
   position: relative;
   z-index: 1;
+  margin-top: 0;
 }
 
 @media (max-width: 768px) {
   .what-we-learn {
-    margin-top: 30px;
+    margin-top: 0;
     margin-bottom: 0.5rem;
+  }
+  
+  .section {
+    padding: 1rem 0.5rem;
+  }
+  
+  .section.bg-white + .section.bg-white {
+    margin-top: -20px; /* מרווח קטן יותר במובייל */
   }
 }
 

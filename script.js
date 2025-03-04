@@ -109,13 +109,27 @@ function adjustHeadingPosition() {
   const whatWeLearnHeading = document.querySelector('.what-we-learn');
   if (whatWeLearnHeading) {
     if (window.innerWidth <= 768) {
-      // טלפון נייד וטאבלט - מרווח חיובי כדי להוריד את הכותרת למטה
-      whatWeLearnHeading.style.marginTop = '30px';
+      // טלפון נייד וטאבלט
+      whatWeLearnHeading.style.marginTop = '0';
       whatWeLearnHeading.style.marginBottom = '0.5rem';
+      
+      // התאמת מרווח הסקשן
+      const section = whatWeLearnHeading.closest('section');
+      if (section) {
+        section.style.marginTop = '-20px';
+        section.style.paddingTop = '10px';
+      }
     } else {
       // מחשב שולחני
-      whatWeLearnHeading.style.marginTop = '-50px';
+      whatWeLearnHeading.style.marginTop = '0';
       whatWeLearnHeading.style.marginBottom = '1rem';
+      
+      // התאמת מרווח הסקשן
+      const section = whatWeLearnHeading.closest('section');
+      if (section) {
+        section.style.marginTop = '-30px';
+        section.style.paddingTop = '10px';
+      }
     }
   }
 }

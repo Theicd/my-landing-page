@@ -98,7 +98,28 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // ניקוי כל אירועי ה-onclick בדף
   cleanAllOnclickEvents();
+  
+  // טיפול במיקום הכותרת "מה נלמד ליצור עם AI?" בהתאם לגודל המסך
+  adjustHeadingPosition();
+  window.addEventListener('resize', adjustHeadingPosition);
 });
+
+// פונקציה לטיפול במיקום הכותרת בהתאם לגודל המסך
+function adjustHeadingPosition() {
+  const whatWeLearnHeading = document.querySelector('.what-we-learn');
+  if (whatWeLearnHeading) {
+    if (window.innerWidth <= 480) {
+      // טלפון נייד
+      whatWeLearnHeading.style.marginTop = '-35px';
+    } else if (window.innerWidth <= 768) {
+      // טאבלט
+      whatWeLearnHeading.style.marginTop = '-42px';
+    } else {
+      // מחשב שולחני
+      whatWeLearnHeading.style.marginTop = '-50px';
+    }
+  }
+}
 
 // Intersection Observer for Animations
 document.addEventListener('DOMContentLoaded', function() {

@@ -171,6 +171,65 @@ body {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
+/* מרכוז הטקסט בכרטיסיות */
+.card h3 {
+  text-align: center;
+  width: 100%;
+}
+
+.card .flex-col {
+  text-align: center;
+}
+
+/* עיצוב אחיד לכפתורים */
+.card .flex.items-center {
+  justify-content: flex-start; /* שינוי ליישור התחלה (ימין בעברית) */
+  text-align: right;
+  position: relative;
+  padding: 0;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.card .text-4xl {
+  margin-left: 1rem;
+  margin-right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+}
+
+.card .flex-col.text-center.flex-1 {
+  text-align: center;
+  width: 100%;
+  padding-right: 0;
+}
+
+.card button {
+  background-color: var(--primary);
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.card button:hover {
+  background-color: var(--secondary);
+  transform: translateY(-2px);
+}
+
+.card .flex.justify-center {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
 /* Section styles */
 .section {
   padding: 2rem 1rem;
@@ -225,6 +284,14 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 1rem 2rem 2rem;
+}
+
+.card .flex-col.h-full {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
 /* Mobile Specific Styles */

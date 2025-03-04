@@ -125,6 +125,7 @@ body {
   .icon-glow {
     font-size: 18px;
     animation-duration: 2s;
+    vertical-align: middle; /* שמירה על יישור אנכי */
   }
   
   .section-title + .grid-container .card:first-of-type {
@@ -204,9 +205,14 @@ body {
 }
 
 .icon-glow {
-  display: inline-block;
+  display: inline;
   animation: glow 1.5s ease-in-out infinite alternate;
-  font-size: 1.1em;
+}
+
+.section-title .icon-glow {
+  display: inline;
+  position: relative;
+  vertical-align: baseline;
 }
 
 @keyframes glow {
@@ -496,6 +502,7 @@ footer {
   .section-title .icon-glow {
     font-size: 18px;
     margin: 0 2px; /* מרווח קטן יותר בין האייקון לטקסט */
+    vertical-align: middle; /* שמירה על יישור אנכי */
   }
 }
 

@@ -108,12 +108,9 @@ document.addEventListener('DOMContentLoaded', function() {
 function adjustHeadingPosition() {
   const whatWeLearnHeading = document.querySelector('.what-we-learn');
   if (whatWeLearnHeading) {
-    if (window.innerWidth <= 480) {
-      // טלפון נייד
-      whatWeLearnHeading.style.marginTop = '-35px';
-    } else if (window.innerWidth <= 768) {
-      // טאבלט
-      whatWeLearnHeading.style.marginTop = '-42px';
+    if (window.innerWidth <= 768) {
+      // טלפון נייד וטאבלט - מרווח חיובי כדי להוריד את הכותרת למטה
+      whatWeLearnHeading.style.marginTop = '30px';
     } else {
       // מחשב שולחני
       whatWeLearnHeading.style.marginTop = '-50px';

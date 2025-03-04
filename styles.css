@@ -192,7 +192,7 @@ body {
 
 @media (max-width: 768px) {
   .what-we-learn {
-    margin-top: -35px;
+    margin-top: 30px; /* שינוי מ-35px- למרווח חיובי של 30px כדי להוריד את הכותרת למטה */
   }
 }
 
@@ -202,7 +202,7 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 8px;
   max-width: 1200px;
-  margin: -50px auto 0;
+  margin: 0 auto;
   padding: 2rem;
 }
 
@@ -211,7 +211,7 @@ body {
   .grid-container {
     gap: 0;
     padding: 0.25rem;
-    margin-top: -30px;
+    margin-top: 0; /* שינוי מרווח עליון ל-0 כדי למנוע מרווח מיותר */
   }
   
   .card {

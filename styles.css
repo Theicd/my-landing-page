@@ -124,6 +124,7 @@ body {
   
   .icon-glow {
     font-size: 18px;
+    animation-duration: 2s;
   }
   
   .section-title + .grid-container .card:first-of-type {
@@ -200,6 +201,21 @@ body {
   position: relative;
   z-index: 1;
   margin-top: 0;
+}
+
+.icon-glow {
+  display: inline-block;
+  animation: glow 1.5s ease-in-out infinite alternate;
+  font-size: 1.1em;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px var(--primary), 0 0 20px var(--primary);
+  }
+  to {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px var(--secondary), 0 0 40px var(--secondary);
+  }
 }
 
 @media (max-width: 768px) {

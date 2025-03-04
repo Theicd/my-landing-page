@@ -176,7 +176,7 @@ body {
   font-weight: bold;
   text-align: center;
   margin-top: -50px;
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
   background: linear-gradient(45deg, var(--primary), var(--secondary));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -192,7 +192,8 @@ body {
 
 @media (max-width: 768px) {
   .what-we-learn {
-    margin-top: 30px; /* שינוי מ-35px- למרווח חיובי של 30px כדי להוריד את הכותרת למטה */
+    margin-top: 30px;
+    margin-bottom: 0.5rem;
   }
 }
 
@@ -203,7 +204,7 @@ body {
   gap: 8px;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem 2rem 2rem;
 }
 
 /* Mobile Specific Styles */
@@ -211,7 +212,7 @@ body {
   .grid-container {
     gap: 0;
     padding: 0.25rem;
-    margin-top: 0; /* שינוי מרווח עליון ל-0 כדי למנוע מרווח מיותר */
+    margin-top: 0; /* שמירה על מרווח עליון 0 */
   }
   
   .card {

@@ -111,9 +111,11 @@ function adjustHeadingPosition() {
     if (window.innerWidth <= 768) {
       // טלפון נייד וטאבלט - מרווח חיובי כדי להוריד את הכותרת למטה
       whatWeLearnHeading.style.marginTop = '30px';
+      whatWeLearnHeading.style.marginBottom = '0.5rem';
     } else {
       // מחשב שולחני
       whatWeLearnHeading.style.marginTop = '-50px';
+      whatWeLearnHeading.style.marginBottom = '1rem';
     }
   }
 }

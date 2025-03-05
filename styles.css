@@ -202,6 +202,12 @@ body {
   margin-top: 0;
 }
 
+/* סגנון ספציפי לכותרת "ליצור קסם דיגיטלי" */
+.digital-magic-title {
+  font-size: clamp(1.5rem, 5vw, 3.5rem) !important;
+  margin-top: 0;
+}
+
 @media (max-width: 768px) {
   .what-we-learn {
     margin-top: 0;

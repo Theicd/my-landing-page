@@ -112,6 +112,10 @@ body {
     margin-top: -35px;
   }
   
+  .digital-magic-title {
+    margin-top: 5px !important; /* Move up by 10px from the original 15px */
+  }
+  
   .hero-subtitle {
     font-size: 1.1rem;
     line-height: 1.4;
